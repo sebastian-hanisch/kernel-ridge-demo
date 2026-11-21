@@ -314,7 +314,7 @@ def zero_count(alpha, tol: float = 1e-12) -> int:
 
 
 def ridge_pm1(n: int, seed: int, sigma: float = 0.4, lam: float = 0.3) -> dict:
-    """Kernel Ridge auf ±1-Etiketten des Kreises (Plan-Erzeuger, 10 % vertauschte Etiketten): Zahl der Nullen in alpha."""
+    """Kernel Ridge auf ±1-Labels des Kreises (Plan-Erzeuger, 10 % vertauschte Labels): Zahl der Nullen in alpha."""
     X, y = S.make_circle(n, seed)
     K = M.gram(X, X, sigma)
     alpha = np.linalg.solve(K + lam * np.eye(n), y)
@@ -440,5 +440,5 @@ def verdict_kern(vehicle: str, live: dict, rows: list, plan: dict, floor: float)
 def verdict_zero(zeros: int, n: int, sv_mean: float, sv_lo: float, sv_hi: float, total_zero: int, total_coeff: int, n_inst: int) -> tuple[str, str]:
     """Verdikt „keine Stützvektoren“: Nullen in alpha (diese Instanz und alle vorgerechneten) gegen den Stützvektoranteil von SVC."""
     total = f"{total_coeff:,}".replace(",", " ")
-    return "info", (f"Kernel Ridge auf den ±1-Etiketten dieser Instanz: {zeros} Nullen in {n} Koeffizienten (vorgerechnet: {total_zero} von {total} in {n_inst} Instanzen, Rauschgrenze 1e-12 "
+    return "info", (f"Kernel Ridge auf den ±1-Labels dieser Instanz: {zeros} Nullen in {n} Koeffizienten (vorgerechnet: {total_zero} von {total} in {n_inst} Instanzen, Rauschgrenze 1e-12 "
                     f"des größten Betrags). SVC mit demselben Kern: Stützvektoranteil im Mittel {pct(sv_mean)} ({pct(sv_lo, 0)} bis {pct(sv_hi, 0)}). Gilt für allgemeine Lage; für y = 0 ist alpha = 0.")

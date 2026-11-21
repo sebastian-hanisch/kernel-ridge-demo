@@ -1,4 +1,4 @@
-"""Plan-Erzeuger: ausgedachte Zielfunktionen über dem Plan [-2, 2]^2, Punkte, Rauschen, ±1-Etiketten des Kreises und Ziehungen aus dem GP-Prior.
+"""Plan-Erzeuger: ausgedachte Zielfunktionen über dem Plan [-2, 2]^2, Punkte, Rauschen, ±1-Labels des Kreises und Ziehungen aus dem GP-Prior.
 
 Alles ist ein Modell (kein Messdatum). Zufallsquelle: SplitMix64 (krd_rng.py); Normalzahlen als `NormalDist().inv_cdf(random())` (schnell; in den Rändern über math.log,
 deshalb sind Gleitkommagrößen daraus im Test Bänder und keine exakten Werte)."""
@@ -84,7 +84,7 @@ CIRCLE_RADIUS = math.sqrt(2.0 / math.pi)       # Kreis mit halber Fläche in [-1
 
 
 def make_circle(n: int, seed: int, flip: float = 0.1):
-    """±1-Etiketten: innerhalb des Kreises mit halber Fläche +1, sonst -1; jedes Etikett mit Wahrscheinlichkeit flip vertauscht. Rückgabe (X, y_pm1)."""
+    """±1-Labels: innerhalb des Kreises mit halber Fläche +1, sonst -1; jedes Label mit Wahrscheinlichkeit flip vertauscht. Rückgabe (X, y_pm1)."""
     rng = SplitMix64(seed)
     X = uniform_points(rng, n, -1.0, 1.0)
     inside = (np.sqrt((X ** 2).sum(1)) <= CIRCLE_RADIUS).astype(int)
@@ -94,5 +94,5 @@ def make_circle(n: int, seed: int, flip: float = 0.1):
 
 
 def circle_truth(X):
-    """Wahre ±1-Etiketten des Kreises (ohne Vertauschung)."""
+    """Wahre ±1-Labels des Kreises (ohne Vertauschung)."""
     return (np.sqrt((np.atleast_2d(X) ** 2).sum(1)) <= CIRCLE_RADIUS).astype(int) * 2 - 1

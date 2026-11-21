@@ -203,7 +203,7 @@ per = zf["per_instance"]
 kind, text = EV.verdict_zero(rp["zeros"], 100, sum(p["sv_share"] for p in per) / len(per), min(p["sv_share"] for p in per), max(p["sv_share"] for p in per),
                              sum(p["zeros"] for p in per), len(per) * zf["n"], len(per))
 getattr(st, kind)(text)
-st.caption("Kreis mit halber Fläche in [-1, 1]², 10 % vertauschte Etiketten, Gauß-Kern σ = 0,4, Kernel Ridge λ = 0,3, SVC C = 1 (feste Einstellungen, kein Verfahrensvergleich).")
+st.caption("Kreis mit halber Fläche in [-1, 1]², 10 % vertauschte Labels, Gauß-Kern σ = 0,4, Kernel Ridge λ = 0,3, SVC C = 1 (feste Einstellungen, kein Verfahrensvergleich).")
 
 st.markdown("---")
 

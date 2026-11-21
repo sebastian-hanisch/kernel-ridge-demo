@@ -152,7 +152,7 @@ def hand_example(lam=F(1), xstar=F(2)):
 
 
 def hand_pm1(lam=F(1)):
-    """Dieselben drei Punkte mit den Etiketten (+1, -1, +1): alpha in Brüchen (alle ungleich null) und Werte an den Daten."""
+    """Dieselben drei Punkte mit den Labels (+1, -1, +1): alpha in Brüchen (alle ungleich null) und Werte an den Daten."""
     K = hand_gram()
     A = [[K[i][j] + (F(lam) if i == j else 0) for j in range(3)] for i in range(3)]
     al = fsolve(A, [F(1), F(-1), F(1)])
